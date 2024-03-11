@@ -8,6 +8,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabSheet;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,20 @@ public class MainView extends VerticalLayout {
         Button nextButton = new Button("Next >");
 
         prevButton.addClickListener(event -> {
+            System.out.println("prev button " + tabSheet.getSelectedIndex());
+            if (tabSheet.getSelectedIndex() > 0) {
+                tabSheet.setSelectedIndex(tabSheet.getSelectedIndex() - 1);
+            }
             prevButton.setEnabled(tabSheet.getSelectedIndex() > 0);
             nextButton.setEnabled(tabSheet.getSelectedIndex() < 2);
-
-            tabSheet.setSelectedIndex(tabSheet.getSelectedIndex() - 1);
         });
         nextButton.addClickListener(event -> {
+            System.out.println("next button " + tabSheet.getSelectedIndex());
+            if (tabSheet.getSelectedIndex() < 2) {
+                tabSheet.setSelectedIndex(tabSheet.getSelectedIndex() + 1);
+            }
             prevButton.setEnabled(tabSheet.getSelectedIndex() > 0);
             nextButton.setEnabled(tabSheet.getSelectedIndex() < 2);
-
-            tabSheet.setSelectedIndex(tabSheet.getSelectedIndex() + 1);
         });
         Button close = new Button("Close");
 
@@ -54,9 +59,12 @@ public class MainView extends VerticalLayout {
         dialog.setHeaderTitle("Workflow");
         dialog.add(content);
 
-        Button start = new Button("show multi-step dialog");
+        Button start = new Button("show dialog");
         start.addClickListener(event -> {
             tabSheet.setSelectedIndex(0);
+            prevButton.setEnabled(false);
+            nextButton.setEnabled(true);
+
             dialog.open();
         });
         close.addClickListener(event -> {
