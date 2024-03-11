@@ -83,21 +83,23 @@ public class MainView extends VerticalLayout {
 
             tabs.setSelectedIndex(tabs.getSelectedIndex() + 1);
         });
-        HorizontalLayout buttons = new HorizontalLayout(prevButton, nextButton, new Button("Close"));
+        Button close = new Button("Close");
+
+        HorizontalLayout buttons = new HorizontalLayout(prevButton, nextButton, close);
         buttons.setHeight("50px");
 
         VerticalLayout content = new VerticalLayout(tabs, buttons);
 
         Dialog dialog = new Dialog();
+        dialog.setHeaderTitle("multi-step dialog");
         dialog.add(content);
 
         Button start = new Button("show multi-step dialog");
         start.addClickListener(event -> {
-            dialog.s
-            prevButton.setEnabled(tabs.getSelectedIndex() == 2);
-            nextButton.setEnabled(tabs.getSelectedIndex() == 0);
-
-            tabs.setSelectedIndex(tabs.getSelectedIndex() + 1);
+            dialog.open();
+        });
+        close.addClickListener(event -> {
+            dialog.close();
         });
 
         add(start);
