@@ -56,13 +56,13 @@ public class MainView extends VerticalLayout {
 //        // shared-styles.css.
 //        addClassName("centered-content");
 
-        Tab tab1 = new Tab("");
+        Tab tab1 = new Tab("Step 1");
 //        tab1.add(new Label("components on page 1"));
 
-        Tab tab2 = new Tab("");
+        Tab tab2 = new Tab("Step 2");
 //        tab2.add(new Button("components on page 2"));
 
-        Tab tab3 = new Tab("");
+        Tab tab3 = new Tab("Step 3");
 //        tab3.add(new TextField("components on page 3"));
 
         Tabs tabs = new Tabs(tab1, tab2, tab3);
@@ -91,7 +91,7 @@ public class MainView extends VerticalLayout {
         VerticalLayout content = new VerticalLayout(tabs, buttons);
 
         Dialog dialog = new Dialog();
-        dialog.setHeaderTitle("multi-step dialog");
+        dialog.setHeaderTitle("Workflow");
         dialog.add(content);
 
         Button start = new Button("show multi-step dialog");
