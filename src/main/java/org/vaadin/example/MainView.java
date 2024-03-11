@@ -1,6 +1,7 @@
 package org.vaadin.example;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -86,6 +87,19 @@ public class MainView extends VerticalLayout {
         buttons.setHeight("50px");
 
         VerticalLayout content = new VerticalLayout(tabs, buttons);
-        add(content);
+
+        Dialog dialog = new Dialog();
+        dialog.add(content);
+
+        Button start = new Button("show multi-step dialog");
+        start.addClickListener(event -> {
+            dialog.s
+            prevButton.setEnabled(tabs.getSelectedIndex() == 2);
+            nextButton.setEnabled(tabs.getSelectedIndex() == 0);
+
+            tabs.setSelectedIndex(tabs.getSelectedIndex() + 1);
+        });
+
+        add(start);
     }
 }
